@@ -22,4 +22,4 @@ def post_student(request):
         return Response({'status':403, 'message':'Something went wrong'})
 
     serializer.save()
-    return Response({'status':200, 'payload':data, 'message': 'your data is saved.'})
+    return Response({'status':200, 'payload':data, 'message': 'yours data is saved.'})
