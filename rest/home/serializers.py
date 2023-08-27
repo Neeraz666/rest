@@ -6,14 +6,14 @@ class StudentSerializer(serializers.ModelSerializer):
         model = Student
         fields = '__all__'
 
-    def validate(self, data):
+    # def validate(self, data):
 
-        if data['age']<18:
-            raise serializers.ValidationError({'error': 'Age cant be less than 18.'})
+    #     if data['age']<18:
+    #         raise serializers.ValidationError({'error': 'Age cant be less than 18.'})
         
-        if data['name']:
-            for n in data['name']:
-                if n.isdigit():
-                        raise serializers.ValidationError({'error':'Name cant be numeric.'})
+    #     if data['name']:
+    #         for n in data['name']:
+    #             if n.isdigit():
+    #                     raise serializers.ValidationError({'error':'Name cant be numeric.'})
 
-        return data
+    #     return data
