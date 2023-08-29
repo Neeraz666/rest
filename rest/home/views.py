@@ -12,6 +12,12 @@ def home(request):
     serializer = StudentSerializer(studentobj, many=True)
     return Response({'status':200, 'message':serializer.data})
 
+@api_view(['GET'])
+def get_book(request):
+     bookobjs = Book.objects.all()
+     serializer = BookSerializer(bookobjs, many = True)
+     return Response({'status':200, 'Books':serializer.data})
+
 @api_view(['POST'])
 def post_student(request):
     data = request.data

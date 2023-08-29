@@ -20,11 +20,11 @@ class StudentSerializer(serializers.ModelSerializer):
     
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
-        model = Student
+        model = Category
         fields = '__all__'
 
 class BookSerializer(serializers.ModelSerializer):
-    category = CategorySerializer
+    category = CategorySerializer()
     class Meta:
-        model = Student
+        model = Book
         fields = '__all__'
