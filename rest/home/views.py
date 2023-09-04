@@ -7,6 +7,9 @@ from rest_framework.views import APIView
 from rest_framework.authtoken.models import Token
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
+from rest_framework_simplejwt.authentication import JWTAuthentication
+from rest_framework_simplejwt.tokens import RefreshToken
+
 
 # Create your views here.
 
@@ -29,13 +32,19 @@ class RegisterUser(APIView):
         serializer.save()
         
         user = User.objects.get(username = serializer.data['username'])
-        token_obj , _ = Token.objects.get_or_create(user=user)
-        return Response({'status': 200, 'payload': serializer.data,'token': str(token_obj) ,'message': 'Your data is saved.'})
+        refresh = RefreshToken.for_user(user)
+        return Response({
+            'status': 200, 
+            'payload': serializer.data, 
+            'refresh': str(refresh),
+            'access': str(refresh.access_token) ,
+            'message': 'Your data is saved.'
+            })
 
 
 
 class StudentAPI(APIView):
-    authentication_classes = [TokenAuthentication]
+    authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated]
 
 
