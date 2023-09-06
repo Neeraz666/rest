@@ -9,9 +9,21 @@ from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework import generics
 
 
 # Create your views here.
+
+class StudentGeneric(generics.ListAPIView, generics.CreateAPIView):
+    queryset = Student.objects.all()
+    serializer_class = StudentSerializer
+
+
+class StudentUpdateGeneric(generics.UpdateAPIView, generics.DestroyAPIView):
+    queryset = Student.objects.all()
+    serializer_class = StudentSerializer
+    lookup_field = 'id'
+
 
 @api_view(['GET'])
 def get_book(request):
